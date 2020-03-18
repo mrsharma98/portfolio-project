@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 """
+superuser/admin
 username:- manish
 password:- 123456
 """
@@ -128,7 +129,18 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
+# this says where to look for static files
+# this is essential for static things
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'portfolio/static/')
+]
+
+# path for saving static files
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
+# run python manage.py collectstatic command
+# it will get u all the static files that are in the folder under the above mentioned static folder
+
 
 
 # For saving media files

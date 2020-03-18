@@ -1,8 +1,6 @@
-<!doctype html>
+<!Doctype html>
 <html lang="en">
-
 {% load staticfiles %}
-<!-- add this above line before adding any static file -->
 
   <head>
     <meta charset="utf-8">
@@ -10,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Portfolio</title>
+    <title>Blog</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/album/">
 
@@ -31,7 +29,7 @@
           <div class="navbar-nav ml-auto">
             <a class="nav-item nav-link" href="http://twitter.com/mrsharma98">Twitter</a>
             <a class="nav-item nav-link" href="{% static 'resume.pdf' %}">Resume</a>
-            <a class="nav-item nav-link" href="{% url 'allblogs' %}">Blog</a>
+            <a class="nav-item nav-link active" href="{% url 'allblogs' %}">Blog</a>
           </div>
         </div>
       </nav>
@@ -39,37 +37,24 @@
 
     <main role="main">
 
-      <section class="jumbotron text-center">
-        <div class="container">
-          <h1 class="jumbotron-heading">Hi, I'm Manish.</h1>
-          <p class="lead text-muted">Hey, my name is Manish Sharma and I love to code in Python and JavaScript. They are the most popular web development technologies.</p>
-          <p>
-            <a href="mailto:mrsharma98@gmail.com" class="btn btn-primary my-2">Email Me</a>
-          </p>
-          <img class="img-fluid" src="{% static 'imagsss.png' %}" alt="" height=200 width=200>
-        </div>
-      </section>
+      <div class="container">
+        <h1 class="text-center pt-3">Welcome to Blog</h1>
+        <br>
+        <br>
+        <h2>Latest Posts</h2>
+        <hr>
 
-      <div class="album py-5 bg-light">
-        <div class="container">
+        {% for blog in blogs.all %}
+          <a href="{% url 'detail' blog.id %}"><h3>{{ blog.title }}</h3></a>
+          <!-- blog is our object and using blog.id we can grab id for a particular thing. -->
+          {{ blog.pub_date_pretty }}
+          <br>
+          <img class="img-fluid" src='{{ blog.image.url }}' height=200 width=200>
+          <br>
+          <p>{{ blog.summary }}...</p>
+          <br>
+        {% endfor %}
 
-          <div class="row">
-
-            {% for job in jobs.all %}
-            <!-- jobs.all allows us to loop through all the jobs -->
-              <div class="col-md-4">
-                <div class="card mb-4 box-shadow">
-                  <img class="card-img-top" src="{{ job.image.url }}" height=200 width=200>
-                  <div class="card-body">
-                    <p class="card-text">{{ job.summary }}</p>
-                  </div>
-                </div>
-              </div>
-            {% endfor %}
-
-
-          </div>
-        </div>
       </div>
 
     </main>
